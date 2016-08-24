@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Universe Tree</title>
+    <link rel="stylesheet" href="css/app.css">
+
+  </head>
+  <body>
+    <div id="universe">
+      <ul>
+        <uni-elements v-bind:model="uniData">
+        </uni-elements>
+      </ul>
+    </div>
+
+    <template id="eb-template">
+      <input v-model="name" v-on:keyup.enter="change" v-focus class="editBox" type="text" value="{{ model.name }}">
+    </template>
+
+    <script type="text/x-template" id="ue-template">
+      <li>
+        <div>
+        	<span v-on:click="toggle" v-on:dblclick="giveInside" v-bind:class="{ clickable: hasInside, isOpen: open }" v-if="!editBox">{{ model.name }} </span><edit-box v-else v-bind:model="model" v-on:blur="edit"></edit-box> <sup v-if="model.type">{{ model.type }}</sup> <sup v-on:click="edit">edit</sup>
+        </div>
+        <ul v-show="open" v-if="hasInside">
+          <uni-elements v-for="model in model.inside" v-bind:model="model">
+          </uni-elements>
+        </ul>
+      </li>
+    </script>
+
+    <script src="js/vendor/vue.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>
