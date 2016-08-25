@@ -22,10 +22,23 @@ ul {
   user-select: none;
 }
 
-sup {
+sup, .edit-sup, .remove-sup {
   padding-left: 5px;
   font-size: 0.75em;
+}
+
+sup {
   color: #a239ca;
+}
+
+.edit-sup {
+  color: #c6b2da;
+  cursor: pointer;
+}
+
+.remove-sup {
+  color: #b90d0d;
+  cursor: pointer;
 }
 
 .clickable, sup {
@@ -46,4 +59,8 @@ sup {
   font-weight: 400;
   font-size: 1em;
   outline: none;
+}
+
+.pointer {
+  cursor: pointer;
 }

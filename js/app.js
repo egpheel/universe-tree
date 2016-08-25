@@ -89,7 +89,14 @@ Vue.component('uni-elements', {
         name: 'new astro'
       })
     },
-    edit: function() {
+    edit: function () {
+      this.editBox = !this.editBox
+    },
+    remove: function(astro) {
+      this.$parent.model.inside.$remove(astro)
+    },
+    handleChange: function (newAstro) {
+      Vue.set(this.model, 'name', newAstro)
       this.editBox = !this.editBox
     }
   }
@@ -103,10 +110,10 @@ var vm = new Vue({
 });
 
 Vue.directive('focus', {
-    bind: function () {
-        var object = this.el;
-        Vue.nextTick(function() {
-            object.focus();
-        });
-    }
+  bind: function () {
+    var object = this.el;
+    Vue.nextTick(function() {
+      object.focus();
+    });
+  }
 });

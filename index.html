@@ -7,6 +7,7 @@
 
   </head>
   <body>
+    <div>Double click an astro to add children, or click the <em>plus</em> sign to create siblings.</div>
     <div id="universe">
       <ul>
         <uni-elements v-bind:model="uniData">
@@ -21,11 +22,16 @@
     <script type="text/x-template" id="ue-template">
       <li>
         <div>
-        	<span v-on:click="toggle" v-on:dblclick="giveInside" v-bind:class="{ clickable: hasInside, isOpen: open }" v-if="!editBox">{{ model.name }} </span><edit-box v-else v-bind:model="model" v-on:blur="edit"></edit-box> <sup v-if="model.type">{{ model.type }}</sup> <sup v-on:click="edit">edit</sup>
+        	<span v-on:click="toggle" v-on:dblclick="giveInside" v-bind:class="{ clickable: hasInside, isOpen: open }" v-if="!editBox">{{ model.name }}</span>
+          <edit-box v-else v-bind:model="model" v-on:blur="edit" v-on:change-name="handleChange"></edit-box>
+          <sup v-if="model.type">{{ model.type }}</sup>
+          <sup v-on:click="edit" class="edit-sup">edit</sup>
+          <sup v-if="model.type !== 'universe'" v-on:click="remove(model)" class="remove-sup">remove</sup>
         </div>
         <ul v-show="open" v-if="hasInside">
           <uni-elements v-for="model in model.inside" v-bind:model="model">
           </uni-elements>
+          <li><span v-on:click="addInside" class="pointer">+</span></li>
         </ul>
       </li>
     </script>
